@@ -40,7 +40,7 @@ class Order(models.Model):
         related_name="Delivery_Crew",
         null=True,
     )
-    status = models.BooleanField(db_index=True, default=0)
+    order_status = models.BooleanField(db_index=True, default=0)
     total = models.DecimalField(max_digits=6, decimal_places=2)
     date = models.DateField(db_index=True)
 
