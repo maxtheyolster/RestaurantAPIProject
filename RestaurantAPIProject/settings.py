@@ -141,13 +141,25 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-    ]
+        'rest_framework_xml.renderers.XMLRenderer',
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5,
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/minute',
+        'user': '15/minute',
+    }
 }
-
-AUTHENTICATION_CLASSES = (
-    'djoser.views.TokenCreateView',
-)
 
 DJOSER = {
     "USER_ID_FIELD": "username",
 }
+
