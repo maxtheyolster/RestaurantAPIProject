@@ -17,8 +17,7 @@ import datetime
 class IsManager(BasePermission):
     def has_permission(self, request, view):
         is_manager = request.user.groups.filter(name='Manager').exists()
-        permission_classes = [IsAuthenticated]
-        return is_manager, permission_classes
+        return is_manager and IsAuthenticated
 
 
 class category_detail(generics.ListCreateAPIView):
@@ -167,7 +166,7 @@ class CartView(generics.ListCreateAPIView, generics.DestroyAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        menu_item_id = serializer.validated['menuitem'].id
+        menu_item_id = serializer.validated_data['menuitem'].id
         try:
             menu_item = MenuItem.objects.get(id=menu_item_id)
         except MenuItem.DoesNotExist:
@@ -255,7 +254,7 @@ class OrderIdView(generics.RetrieveUpdateDestroyAPIView):
     def retrieve(self, request, *args, **kwargs):
         order_id = kwargs.get('pk')
         try:
-            order = Order.object.get(id=order_id)
+            order = Order.objects.get(id=order_id)
         except Order.DoesNotExist:
             return Response("Order not found.", status=status.HTTP_404_NOT_FOUND)
 

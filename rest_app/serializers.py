@@ -9,12 +9,12 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'slug', 'title']
 
 
-class MenuItemSerializer(serializers.HyperlinkedModelSerializer):
+class MenuItemSerializer(serializers.ModelSerializer):
     category_id = serializers.IntegerField(write_only=True)
 
     class Meta:
         model = MenuItem
-        field = ['id', 'title', 'price', 'featured']
+        fields = ['id', 'title', 'price', 'featured', 'category', 'category_id']
         depth = 1
 
 
@@ -53,7 +53,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', ' user', 'delivery_crew', 'order_status', 'total', 'date', 'order_items']
+        fields = ['id', 'user', 'delivery_crew', 'order_status', 'total', 'date', 'order_items']
 
 
 class UserSerializer(serializers.ModelSerializer):
