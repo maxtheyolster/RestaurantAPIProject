@@ -11,6 +11,8 @@ from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 import datetime
+from django.shortcuts import render
+from rest_framework.views import APIView
 # Create your views here.
 
 
@@ -307,4 +309,8 @@ class OrderItemsView(generics.ListAPIView, generics.UpdateAPIView):
             return Response("Order not found.", status=status.HTTP_404_NOT_FOUND)
         return queryset
 
+
+class HomePageView(APIView):
+    def get(self, request):
+        return render(request, 'home.html')
 

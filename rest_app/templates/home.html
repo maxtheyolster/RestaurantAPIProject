@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>API Endpoints</title>
+</head>
+<body>
+    <h1>API Endpoints</h1>
+
+    <h2>User Registration and Token Generation Endpoints</h2>
+    <table id="User Registration and Token Generation Endpoints">
+    <tr>
+        <th>Endpoint</th>
+        <th>Method</th>
+        <th>Purpose</th>
+    </tr>
+    <tr>
+        <td><a href="/auth/users">/auth/users</a></td>
+        <td>POST</td>
+        <td>Creates a new user with name, email, and password</td>
+    </tr>
+    <tr>
+        <td><a href="/auth/users/me/">/auth/users/me</a></td>
+        <td>GET</td>
+        <td>Displays only the current user</td>
+    </tr>
+    <tr>
+        <td><a href="/auth/token/login/">/auth/token/login</a></td>
+        <td>POST</td>
+        <td>Generates access tokens that can be used in other API calls in this project</td>
+    </tr>
+</table>
+
+   <h2>Menu Items Endpoints</h2>
+<table>
+    <tr>
+        <th>Endpoint</th>
+        <th>Role</th>
+        <th>Method</th>
+        <th>Purpose</th>
+    </tr>
+    <tr>
+        <td><a href="/menu-items">/menu-items</a></td>
+        <td>Customer, Delivery Crew</td>
+        <td>GET</td>
+        <td>Lists all menu items</td>
+    </tr>
+    <tr>
+        <td><a href="/menu-items/{menuItem}">/menu-items/{menuItem}</a></td>
+        <td>Customer, Delivery Crew</td>
+        <td>GET</td>
+        <td>Lists single menu item</td>
+    </tr>
+    <tr>
+        <td><a href="/menu-items">/menu-items</a></td>
+        <td>Manager</td>
+        <td>GET, POST</td>
+        <td>Lists all menu items. Creates a new menu item.</td>
+    </tr>
+    <tr>
+        <td><a href="/menu-items/{menuItem}">/menu-items/{menuItem}</a></td>
+        <td>Manager</td>
+        <td>GET, PUT, PATCH</td>
+        <td>Lists single menu item. Updates single menu item. Deletes menu item</td>
+    </tr>
+</table>
+
+<h2>User Group Management Endpoints (Manager Role Only)</h2>
+<table>
+    <tr>
+        <th>Endpoint</th>
+        <th>Method</th>
+        <th>Purpose</th>
+    </tr>
+    <tr>
+        <td><a href="/groups/manager/users">/groups/manager/users</a></td>
+        <td>GET, POST</td>
+        <td>Returns all managers. Assigns the user in the payload to the manager group.</td>
+    </tr>
+    <tr>
+        <td><a href="/groups/manager/users/{userId}">/groups/manager/users/{userId}</a></td>
+        <td>DELETE</td>
+        <td>Removes this particular user from the manager group.</td>
+    </tr>
+    <tr>
+        <td><a href="/groups/delivery-crew/users">/groups/delivery-crew/users</a></td>
+        <td>GET, POST</td>
+        <td>Returns all delivery crew. Assigns the user in the payload to delivery crew group.</td>
+    </tr>
+    <tr>
+        <td><a href="/groups/delivery-crew/users/{userId}">/groups/delivery-crew/users/{userId}</a></td>
+        <td>DELETE</td>
+        <td>Removes this particular user from the manager group.</td>
+    </tr>
+</table>
+
+<h2>Cart Management Endpoints (Customer Role)</h2>
+<table>
+    <tr>
+        <th>Endpoint</th>
+        <th>Method</th>
+        <th>Purpose</th>
+    </tr>
+    <tr>
+        <td><a href="/cart/menu-items">/cart/menu-items</a></td>
+        <td>GET, POST, DELETE</td>
+        <td>Returns current items in the cart for the current user token. Adds the menu item to the cart. Deletes all menu items .</td>
+    </tr>
+
+</table>
+
+<h2>Order Management Endpoints</h2>
+<table>
+    <tr>
+        <th>Endpoint</th>
+        <th>Role</th>
+        <th>Method</th>
+        <th>Purpose</th>
+    </tr>
+    <tr>
+        <td><a href="/orders">/orders</a></td>
+        <td>Customer</td>
+        <td>GET, POST</td>
+        <td>Returns all orders with order items created by this user. Creates a new order by getting current cart items from the cart endpoints and adds those items to the order items table. Then deletes all items from the cart for this user</td>
+    </tr>
+    <tr>
+        <td><a href="/orders/{orderId}">/orders/{orderId}</a></td>
+        <td>Customer</td>
+        <td>GET, PUT, PATCH</td>
+        <td>Returns all items for this order id. Updates the order.</td>
+    </tr>
+    <tr>
+        <td><a href="/orders">/orders</a></td>
+        <td>Manager</td>
+        <td>GET</td>
+        <td>Returns all orders with order items by all users</td>
+    </tr>
+    <tr>
+        <td><a href="/orders/{orderId}">/orders/{orderId}</a></td>
+        <td>Manager</td>
+        <td>DELETE</td>
+        <td>Deletes the order</td>
+    </tr>
+    <tr>
+        <td><a href="/orders">/orders</a></td>
+        <td>Delivery Crew</td>
+        <td>GET</td>
+        <td>Returns all orders with orders assigned to the delivery crew.</td>
+    </tr>
+    <tr>
+        <td><a href="/orders/{orderId}">/orders/{orderId}</a></td>
+        <td>Delivery Crew</td>
+        <td>PATCH</td>
+        <td>A delivery crew person can only update the order status to 0 or 1.</td>
+    </tr>
+</table>
+</body>
+</html>
